@@ -17,45 +17,20 @@ import {
 // Global variables provided by the environment
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-// *** MODIFIED TO READ SECURE ENVIRONMENT VARIABLES (VITE/VERCEL) ***
+// *** FINAL HARDCODED CONFIGURATION (Insecure but guaranteed to start) ***
 const firebaseConfig = { 
-  apiKey: import.meta.env.VITE_APP_FIREBASE_APIKEY,
-  authDomain: import.meta.env.VITE_APP_FIREBASE_AUTHDOMAIN,
-  projectId: import.meta.env.VITE_APP_FIREBASE_PROJECTID,
-  // Add other required keys here if needed
+  apiKey: "PASTE YOUR API KEY HERE AS A STRING", 
+  authDomain: "PASTE YOUR AUTH DOMAIN HERE",
+  projectId: "PASTE YOUR PROJECT ID HERE",
+  // Include any other config keys you received here
 };
 
-const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-// ... rest of the file ...
-// --- UTILITY COMPONENTS ---
+// Eliminate the initialAuthToken variable entirely to simplify startup
+// const initialAuthToken = null; 
 
-const TabButton = ({ name, icon: Icon, currentTab, onClick }) => (
-    <button
-      onClick={() => onClick(name)}
-      className={`px-4 py-3 flex items-center justify-center space-x-2 text-sm font-medium rounded-t-lg transition-all duration-200
-        ${currentTab === name
-          ? 'bg-white text-indigo-700 shadow-t-lg border-b-2 border-indigo-500'
-          : 'bg-gray-100 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600'
-        }
-      `}
-    >
-      <Icon className="w-5 h-5" />
-      <span className="hidden sm:inline">{name}</span>
-    </button>
-);
+// Helper to format dates for display
+// ... (rest of the file remains the same)
 
-const StatusBadge = ({ status }) => {
-    let color = 'bg-gray-200 text-gray-800';
-    if (status === 'Scheduled' || status === 'Draft' || status === 'Pending') color = 'bg-yellow-100 text-yellow-800';
-    if (status === 'Completed' || status === 'Accepted' || status === 'Paid') color = 'bg-green-100 text-green-800';
-    if (status === 'Cancelled' || status === 'Rejected') color = 'bg-red-100 text-red-800';
-    
-    return (
-      <span className={`inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium capitalize ${color}`}>
-        {status}
-      </span>
-    );
-};
 
 // The main App component
 const App = () => {
