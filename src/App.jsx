@@ -17,33 +17,16 @@ import {
 // Global variables provided by the environment
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-// IMPORTANT: This block was corrected. Please ensure the actual Firebase config 
-// is correctly inserted here if you are running outside of the Canvas environment.
+// *** MODIFIED TO READ SECURE ENVIRONMENT VARIABLES (VITE/VERCEL) ***
 const firebaseConfig = { 
-  apiKey: "AIzaSyBz3UkHP7hnAtYCnoD0QLLv8mY_xe9FCcg",
-  authDomain: "business-eco-system.firebaseapp.com",
-  projectId: "business-eco-system",
-  // Ensure any other required config keys (e.g., storageBucket, appId) are included here
+  apiKey: import.meta.env.VITE_APP_FIREBASE_APIKEY,
+  authDomain: import.meta.env.VITE_APP_FIREBASE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_APP_FIREBASE_PROJECTID,
+  // Add other required keys here if needed
 };
 
 const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-
-// Helper to format dates for display
-const formatDate = (dateString) => {
-    if (!dateString) return '';
-    try {
-        // Use a simple format for the receipt, like February 22, 2025
-        return new Date(dateString).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    } catch {
-        return dateString;
-    }
-};
-
+// ... rest of the file ...
 // --- UTILITY COMPONENTS ---
 
 const TabButton = ({ name, icon: Icon, currentTab, onClick }) => (
